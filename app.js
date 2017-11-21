@@ -27,6 +27,13 @@ const events = [
         date: '25 Dec',
     }
 ];
+const centers = [
+{
+    centerName: 'Andela Epic Tower',
+    location: 'Lagos',
+    price: 45000, // per day
+}];
+
 // class
 class User {
     constructor(username, password) {
@@ -101,11 +108,41 @@ class AdminUser extends User {
         }
         return { error: 'An error occured' };
     }
+    validateCenter(centerName, location, price) {
+        for (var i = 0; i < centers.length; i++) {
+            if (
+              centers[i].centerName === centerName &&
+              centers[i].location === location &&
+              centers[i].price === date
+            ) {
+                return { error: 'Center already exists' };
+            }
+        }
+        return true;
+    }
+    createCenter(centerName, location, price) {
+        if (this.validateUser() !== true) {
+            return this.validateUser();
+        } else if (this.validateCenter(centerName, location, price) !== true) {
+            return this.validateCenter(centerName, location, price);
+        } else {
+            const newCenter = {
+                centerName: centerName,
+                location: location,
+                price: price,
+            };
+            centers.push(newCenter);
+            return `Successfullly created: ${JSON.stringify(centers.pop())}`;
+        }
+    }
 }
 /*object*/
 const adminUser = new AdminUser('anaeze', 'password1');
 
 /* encapsulation*/
 adminUser.createEvent('Hackaton', 'Lagos', '25 Dec');
+adminUser.createCenter('National Stadium', 'Abuja', 55000);
+
 adminUser.sendNotification('Hackathon', 'Andela Tower');
+
 

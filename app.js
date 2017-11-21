@@ -27,12 +27,13 @@ const events = [
         date: '25 Dec',
     }
 ];
+// class
 class User {
     constructor(username, password) {
         this.username = username;
         this.password = password;
     }
-    validate() {
+    validateUser() {
         for (var i = 0; i < usersData.length; i++) {
             if (
               this.username === usersData[i].username &&
@@ -56,10 +57,16 @@ class User {
         }
         return true;
     }
+    sendNotification(eventName) {
+        if (typeof eventName === 'string') {
+            return { message: `Admin deleted your event: ${eventName}` };
+        }
+        return { error: 'An error occured' };
+    }
 
     createEvent(eventname, center, date) {
-        if (this.validate() !== true) {
-            return this.validate();
+        if (this.validateUser() !== true) {
+            return this.validateUser();
         } else if (this.validateEvent(eventname, center, date) !== true) {
             return this.validateEvent(eventname, center, date);
         } else {
@@ -73,5 +80,10 @@ class User {
         }
     }
 }
-const newUser = new User('anaeze', 'password2');
+/*object*/
+const newUser = new User('anaeze', 'password1');
+
+/* encapsulation*/
 newUser.createEvent('Hackaton', 'Lagos', '25 Dec');
+newUser.sendNotification('Hackathon');
+

@@ -144,5 +144,3 @@ adminUser.createEvent('Hackaton', 'Lagos', '25 Dec');
 adminUser.createCenter('National Stadium', 'Abuja', 55000);
 
 adminUser.sendNotification('Hackathon', 'Andela Tower');
-
-

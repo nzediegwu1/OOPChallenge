@@ -1,4 +1,4 @@
-﻿// Dummy Data
+// Dummy Data
 const usersData = [
   {
       username: 'anaeze',

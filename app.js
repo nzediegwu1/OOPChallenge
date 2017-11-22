@@ -1,4 +1,5 @@
-﻿const usersData = [
+﻿// Dummy Data
+const usersData = [
   {
       username: 'anaeze',
       password: 'password1',
@@ -6,20 +7,7 @@
   {
       username: 'oreoluwa',
       password: 'password2',
-  },
-  {
-      username: 'seun',
-      password: 'password3',
-  },
-  {
-      username: 'godswill',
-      password: 'password4',
-  },
-  {
-      username: 'wisdom',
-      password: 'password5',
-  },
-];
+  }];
 const events = [
     {
         eventname: 'Hackaton',
@@ -34,7 +22,7 @@ const centers = [
     price: 45000, // per day
 }];
 
-// class
+// Parent Class
 class User {
     constructor(username, password) {
         this.username = username;
@@ -49,7 +37,7 @@ class User {
                 return true;
             }
         }
-        return { error: 'You have no access to this resource' };
+        return { error: 'You have no access to this resource, checkout dummy data' };
     }
 
     validateEvent(eventname, center, date) {
@@ -64,6 +52,7 @@ class User {
         }
         return true;
     }
+    // Will be overrided in child class to demonstrate polymorphism
     sendNotification(eventName) {
         if (typeof eventName === 'string') {
             return { message: `Admin deleted your event: ${eventName}` };
@@ -87,23 +76,17 @@ class User {
         }
     }
 }
-/*object*/
-const newUser = new User('anaeze', 'password1');
 
-/* encapsulation*/
-newUser.createEvent('Hackaton', 'Lagos', '25 Dec');
-newUser.sendNotification('Hackathon');
-
-// inheritance
+// Inheritance: Child class from Parent class
 class AdminUser extends User {
     constructor(username, password) {
         super();
         this.username = username;
         this.password = password;
     }
-    // polymorphism
+    // Polymorphism implementation
     sendNotification(eventName, center) {
-        if (typeof eventName === 'string' && center === 'string') {
+        if (typeof eventName === 'string' && typeof center === 'string') {
             return { message: `User deleted own event: ${eventName} at ${center} center` };
         }
         return { error: 'An error occured' };
@@ -136,11 +119,27 @@ class AdminUser extends User {
         }
     }
 }
+
 /*object*/
-const adminUser = new AdminUser('anaeze', 'password1');
+const newUser = new User('anaeze', 'password1');
 
 /* encapsulation*/
-adminUser.createEvent('Hackaton', 'Lagos', '25 Dec');
-adminUser.createCenter('National Stadium', 'Abuja', 55000);
+const newEvent = newUser.createEvent('Hackaton', 'Lagos', '25 Dec');
+const newNotification = newUser.sendNotification('Hackathon');
 
-adminUser.sendNotification('Hackathon', 'Andela Tower');
+//display result
+console.log(newEvent);
+console.log(newNotification);
+
+/*Object*/
+const adminUser = new AdminUser('anaeze', 'password1');
+
+/* Encapsulation*/
+const newAdminEvent = adminUser.createEvent('Bootcamp', 'Andela Lagos', '20 Nov');
+const newCenter = adminUser.createCenter('National Stadium', 'Abuja', 55000);
+const newAdminnotification = adminUser.sendNotification('Hackathon', 'Andela Tower');
+
+//display result
+console.log(newAdminEvent);
+console.log(newCenter);
+console.log(newAdminnotification);

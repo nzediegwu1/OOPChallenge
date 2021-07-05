@@ -1,0 +1,19 @@
+{
+  "name": "eventmanager",
+  "version": "1.0.0",
+  "description": "An OOP implementation that models a real-world scenario/problem in an Event Management application, allowing user class to create events and send notification, while admin user class, which inherits from the user class, can create a center, create an event by inheritance and send notification by method overriding",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "keywords": [
+    "OOP",
+    "class",
+    "object",
+    "abstraction",
+    "encapsulation",
+    "inheritance",
+    "polymorphism"
+  ],
+  "author": "anaeze",
+  "license": "ISC"
+}
